@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-toolbar color="primary" (click)="dismiss()">
+    <ion-title>#{{game_id}} Result Entry</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<ion-grid>
+  <ion-row *ngIf="!finalSubmit">
+    <ion-col>
+      <ion-card style="width: 100%;margin: 0px;padding: 0px;border:1px solid lightgray">
+        <ion-card-header >
+          <ion-card-subtitle>Game Id - #{{game_id}}</ion-card-subtitle>
+          <ion-card-title><small> Player Name </small>- {{joinPlayerList[i].player_name}}</ion-card-title>
+        </ion-card-header>
+        <ion-item>
+          <ion-label position="stacked">Kill</ion-label>
+          <ion-input [(ngModel)]="kill" placeholder="Player Kill" type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Amount</ion-label>
+          <ion-input [(ngModel)]="amount" placeholder="Player Win Amount" type="text"></ion-input>
+        </ion-item>
+        
+        <ion-card-content>
+          <ion-grid>
+            <ion-row>
+            <ion-col class="ion-text-center" >
+            <ion-chip  (click)="resultEntryData()">
+              <ion-label color='danger' >Submit</ion-label>
+            </ion-chip >
+            
+          </ion-col>
+        </ion-row>
+        
+      </ion-grid>
+         
+          
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+  <ion-row *ngIf="finalSubmit" class="ion-margin-bottom">
+    <ion-col class="ion-text-center">
+      <ion-card style="width: 100%;margin: 0px;padding: 0px;border:1px solid lightgray" *ngFor="let data of resultData;index as i">
+        <ion-card-header>
+          <ion-card-subtitle>{{i+1}} : {{joinPlayerList[i].player_name}}</ion-card-subtitle>
+          <ion-card-title>kill : {{data.kill}}</ion-card-title>
+          <ion-card-title>Amount : {{data.amount}}</ion-card-title>
+        </ion-card-header>
+      
+        <ion-card-content>
+          <ion-button size="small" color="medium" (click)="editResultData(i)"><ion-icon name="create-outline" ></ion-icon> Edit</ion-button>
+        </ion-card-content>
+      </ion-card>
+      <ion-button color="danger" size="small" (click)="onSubmitFinalResult()">Final Submit</ion-button>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+</ion-content>

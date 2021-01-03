@@ -1,0 +1,56 @@
+
+
+
+
+
+  <ion-grid>
+    <ion-row  class="ion-margin-bottom" *ngFor='let data of upcomingMatchData; index as i'>
+      <ion-col class="bs ion-text-center" *ngIf='!noUpcomingMatch' >
+        <ion-img src='https://gamingmazzafiles.s3.ap-south-1.amazonaws.com/gamesImages/ffsolo.jpg'></ion-img>
+        <ion-grid>
+          <ion-row >
+            <ion-col >
+              
+              <b class="gt">#{{data.id}} Duo Match</b><br>
+              <ion-text color='danger'>Date : {{data.date| date:"dd/mm/yyyy"}}</ion-text><br>
+              <ion-text color='danger'>Time : {{data.time }}</ion-text><br>
+              <ion-text>Winning Prize : {{data.win_prize}}</ion-text><br>
+              <ion-text>Entry Fee : {{data.entry_fee}}</ion-text><br>
+              <ion-text>Per Kill : {{data.per_kill}}</ion-text><br>
+              <ion-text>Map : {{data.map}}</ion-text><br><br>
+              <ion-progress-bar color="dark" value='{{1/data.spots*data.join_spot}}'></ion-progress-bar>
+             
+              <div class="ion-text-center">
+                <small>{{data.join_spot}}/{{data.spots}}</small>
+              </div>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              
+              <ion-chip (click)="editMatch(data)">
+                <ion-label color='secondary'>Edit Match</ion-label>
+              </ion-chip>
+             
+               
+                <ion-chip (click)="rommDetailsAlert(data.id)">
+                  <ion-label color='danger' >Enter Room Details</ion-label>
+                </ion-chip>
+              
+              
+
+            </ion-col>
+          </ion-row>
+         
+        </ion-grid>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf='noUpcomingMatch'>
+      <ion-col class="noMatchError">
+        <ion-img src='https://gamingmazzafiles.s3.ap-south-1.amazonaws.com/gamesImages/ffsolo.jpg'></ion-img>
+        <h1 >Comming Soon</h1>
+        <ion-text color='danger'><small>Stay Tuned</small></ion-text>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+

@@ -1,0 +1,49 @@
+<ion-header mode='md'>
+  <ion-toolbar color='primary'>
+    <ion-title>Withdraw</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<ion-grid>
+ 
+  
+  <ion-row *ngFor="let data of wth_data;index as i" class="ion-text-center">
+    <ion-card style="width: 100%;margin: 0px;padding: 0px;border:1px solid lightgray">
+      <ion-card-header >
+        <ion-card-subtitle>DATE - {{data.wth_date | date}}</ion-card-subtitle>
+        <ion-card-title>AMOUNT - {{data.wth_amount}}</ion-card-title>
+      </ion-card-header>
+      <ion-text>MODE - {{data.wth_method | uppercase}}</ion-text>
+      
+      <ion-card-content>
+        <ion-grid>
+
+        
+        <ion-row>
+
+        
+        <ion-col size='4'>
+          <ion-chip (click)="userTransaction(data.id)">
+            <ion-label color='tertiary'>TXN History</ion-label>
+          </ion-chip >
+        </ion-col>
+       <ion-col size='4'>
+        <ion-chip (click)="onRefundWithdraw(data.id)">
+          <ion-label color='success'>Refund</ion-label>
+        </ion-chip>
+       </ion-col>
+       <ion-col size='4'>
+        <ion-chip (click)="onConfirmWithdraw(data.id)">
+          <ion-label color='danger'>Confirm</ion-label>
+        </ion-chip>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+       
+        
+      </ion-card-content>
+    </ion-card>
+  </ion-row>
+</ion-grid>
+</ion-content>

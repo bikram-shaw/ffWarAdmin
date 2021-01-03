@@ -1,0 +1,25 @@
+
+
+<ion-content>
+ <ion-grid>
+   <ion-row>
+     <ion-col >
+      <ion-segment  [(ngModel)]="mySegment"   color='primary' >
+        <ion-segment-button value="upcoming">
+          <ion-icon name="grid-outline"></ion-icon>
+          <ion-label>Upcoming</ion-label>
+        
+        </ion-segment-button>
+        <ion-segment-button value="ongoing" >
+          <ion-icon name="stopwatch-outline"></ion-icon>
+          <ion-label>Ongoing</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+      <app-upcoming *ngIf="mySegment=='upcoming'"></app-upcoming>
+      <app-ongoing *ngIf="mySegment=='ongoing'"></app-ongoing>
+     </ion-col>
+   </ion-row>
+ </ion-grid>
+ 
+ 
+</ion-content>

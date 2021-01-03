@@ -1,0 +1,45 @@
+
+
+
+
+  <ion-grid>
+    <ion-row  *ngFor='let data of ongoingMatchData; index as i'>
+      <ion-col class="bs"  *ngIf='!noOngoingMatch'>
+        <ion-img src='https://gamingmazzafiles.s3.ap-south-1.amazonaws.com/gamesImages/ffsolo.jpg'></ion-img>
+        <ion-grid>
+          <ion-row>
+            <ion-col >
+              
+              <b class="gt">#{{data.id}} Duo Match</b><br>
+              <ion-text color='danger'>Date : {{data.date| date:"dd/mm/yyyy"}}</ion-text><br>
+              <ion-text color='danger'>Time : {{data.time }}</ion-text><br>
+              <ion-text>Winning Prize : {{data.win_prize}}</ion-text><br>
+              <ion-text>Entry Fee : {{data.entry_fee}}</ion-text><br>
+              <ion-text>Per Kill : {{data.per_kill}}</ion-text><br>
+              <ion-text>Map : {{data.map}}</ion-text><br><br>
+              <ion-progress-bar color="dark" value='{{1/data.spots*data.join_spot}}'></ion-progress-bar>
+             
+              <div class="ion-text-center">
+                <small><ion-text color='medium'>Player Join : </ion-text>{{data.join_spot}}/{{data.spots}}</small>
+              </div>
+            </ion-col>
+          </ion-row>
+          <ion-row >
+            <ion-col class="ion-text-center">            
+              <ion-chip (click)="resultModel(data.id)">
+              <ion-label color='danger'>Enter Result Details</ion-label>
+            </ion-chip>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf='noOngoingMatch'>
+      <ion-col class="noMatchError">
+        <ion-img src='https://gamingmazzafiles.s3.ap-south-1.amazonaws.com/gamesImages/ffsolo.jpg'></ion-img>
+        <h1 >No Ongoing Matches</h1>
+        <ion-text color='danger'><small>Join Match Now</small></ion-text>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
