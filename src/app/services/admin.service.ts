@@ -36,4 +36,10 @@ export class AdminService {
   submitResult(data):Observable<any>{
     return this.http.post(this.url+"/result",data)
   }
+  confirmWithdraw(id):Observable<any>{
+    return this.http.get(this.url+"/user-withdraw-request/"+id)
+  }
+  refundWithdraw(data):Observable<any>{
+    return this.http.post(this.url+"/refund",data)
+  }
 }
