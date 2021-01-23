@@ -11,7 +11,7 @@
           <ion-row >
             <ion-col >
               
-              <b class="gt">#{{data.id}} Duo Match</b><br>
+              <b class="gt">#{{data.id}} {{data.type | uppercase}} MATCH</b><br>
               <ion-text color='danger'>Date : {{data.date| date:"dd/mm/yyyy"}}</ion-text><br>
               <ion-text color='danger'>Time : {{data.time }}</ion-text><br>
               <ion-text>Winning Prize : {{data.win_prize}}</ion-text><br>
@@ -28,12 +28,12 @@
           <ion-row>
             <ion-col>
               
-              <ion-chip (click)="editMatch(data)">
+              <ion-chip (click)="editMatch(data,i)">
                 <ion-label color='secondary'>Edit Match</ion-label>
               </ion-chip>
              
                
-                <ion-chip (click)="rommDetailsAlert(data.id)">
+                <ion-chip (click)="rommDetailsAlert(data.id,i)">
                   <ion-label color='danger' >Enter Room Details</ion-label>
                 </ion-chip>
               
@@ -46,11 +46,11 @@
       </ion-col>
     </ion-row>
     <ion-row *ngIf='noUpcomingMatch'>
-      <ion-col class="noMatchError">
-        <ion-img src='https://gamingmazzafiles.s3.ap-south-1.amazonaws.com/gamesImages/ffsolo.jpg'></ion-img>
-        <h1 >Comming Soon</h1>
-        <ion-text color='danger'><small>Stay Tuned</small></ion-text>
-      </ion-col>
+      
+        <ion-col  >
+    <app-data-not-available></app-data-not-available>
+    </ion-col>
+      
     </ion-row>
   </ion-grid>
 

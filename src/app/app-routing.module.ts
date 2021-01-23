@@ -13,6 +13,10 @@ const routes: Routes = [
     path: 'edit-match',
     loadChildren: () => import('./edit-match/edit-match.module').then( m => m.EditMatchPageModule)
   },
+  {
+    path: 'user-transaction-model',
+    loadChildren: () => import('./user-transaction-model/user-transaction-model.module').then( m => m.UserTransactionModelPageModule)
+  },
 
   
 ];

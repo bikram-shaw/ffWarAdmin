@@ -5,11 +5,11 @@
 </ion-header>
 
 <ion-content>
-<ion-grid>
+<ion-grid >
  
   
-  <ion-row *ngFor="let data of wth_data;index as i" class="ion-text-center">
-    <ion-card style="width: 100%;margin: 0px;padding: 0px;border:1px solid lightgray">
+  <ion-row *ngFor="let data of wth_data;index as i" class="ion-text-center" >
+    <ion-card class="card" *ngIf="!dataNotAvailable">
       <ion-card-header >
         <ion-card-subtitle>DATE - {{data.wth_date | date}}</ion-card-subtitle>
         <ion-card-title>AMOUNT - {{data.wth_amount}}</ion-card-title>
@@ -24,17 +24,17 @@
 
         
         <ion-col size='4'>
-          <ion-chip (click)="userTransaction(data.id)">
+          <ion-chip (click)="userTxnModal(data.id)">
             <ion-label color='tertiary'>TXN History</ion-label>
           </ion-chip >
         </ion-col>
        <ion-col size='4'>
-        <ion-chip (click)="refundAlert(data.id)">
+        <ion-chip (click)="refundAlert(data.id,i)">
           <ion-label color='success'>Refund</ion-label>
         </ion-chip>
        </ion-col>
        <ion-col size='4'>
-        <ion-chip (click)="confirmAlert(data.id)">
+        <ion-chip (click)="confirmAlert(data.id,i)">
           <ion-label color='danger'>Confirm</ion-label>
         </ion-chip>
       </ion-col>
@@ -44,6 +44,11 @@
         
       </ion-card-content>
     </ion-card>
+  </ion-row>
+  <ion-row  *ngIf="dataNotAvailable" class="justify-content-center align-items-center">
+    <ion-col  >
+<app-data-not-available></app-data-not-available>
+</ion-col>
   </ion-row>
 </ion-grid>
 </ion-content>

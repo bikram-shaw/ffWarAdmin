@@ -1,6 +1,9 @@
 <ion-header>
-  <ion-toolbar color="primary" (click)="dismiss()">
+  <ion-toolbar color="primary" >
     <ion-title>#{{game_id}} Result Entry</ion-title>
+    <ion-button slot='end' class="close-btn" (click)="dismiss()">
+      <ion-icon size='large' name="close-circle-outline"></ion-icon>
+    </ion-button>
   </ion-toolbar>
 </ion-header>
 

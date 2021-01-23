@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ModalController } from '@ionic/angular';
 import { AdminService } from '../services/admin.service';
 import { CommonService } from '../services/common.service';
+import { UserTransactionModelPage } from '../user-transaction-model/user-transaction-model.page';
 
 @Component({
   selector: 'app-withdraw',
@@ -10,24 +11,33 @@ import { CommonService } from '../services/common.service';
 })
 export class WithdrawPage implements OnInit {
   wth_data: [];
+  dataNotAvailable: boolean=false;
 
   constructor(
     private adminServices:AdminService,
     private commonService:CommonService,
-    private alertController:AlertController
+    private alertController:AlertController,
+    private modalController:ModalController
   ) { }
 
   ngOnInit() {
     this.withdrawRequest()
   }
+  ionViewWillEnter() {
+    this.ngOnInit();
+}
 withdrawRequest()
 {
 this.adminServices.withdrawRequest().subscribe(res=>{
-console.log(res)
 this.wth_data=res;
+
+if(res.length===0)
+{
+  this.dataNotAvailable=true
+}
 })
 }
-async confirmAlert(id) {
+async confirmAlert(id,i) {
   const alert = await this.alertController.create({
     cssClass: 'my-custom-class',
     header: 'Are you sure ?',
@@ -41,7 +51,7 @@ async confirmAlert(id) {
       }, {
         text: 'Okay',
         handler: () => {
-         this.onConfirmWithdraw(id)
+         this.onConfirmWithdraw(id,i)
         }
       }
     ]
@@ -49,15 +59,16 @@ async confirmAlert(id) {
 
   await alert.present();
 }
-onConfirmWithdraw(id)
+onConfirmWithdraw(id,i)
 {
 this.adminServices.confirmWithdraw(id).subscribe(res=>{
+  this.wth_data.splice(i,1)
   this.commonService.alertService(res)
 },error=>{
   this.commonService.alertService('Bad Request !')
 })
 }
-async refundAlert(id) {
+async refundAlert(id,i) {
   const alert = await this.alertController.create({
     cssClass: 'my-custom-class',
     header: 'Are you sure ?',
@@ -77,7 +88,7 @@ async refundAlert(id) {
       }, {
         text: 'Okay',
         handler: (data) => {
-         this.onRefundWithdraw(id,data.description)
+         this.onRefundWithdraw(id,data.description,i)
         }
       }
     ]
@@ -85,18 +96,27 @@ async refundAlert(id) {
 
   await alert.present();
 }
-onRefundWithdraw(id,description){
+onRefundWithdraw(id,description,i){
   let form=new FormData()
   form.append("id",id)
   form.append("description",description)
   this.adminServices.refundWithdraw(form).subscribe(res=>{
+    this.wth_data.splice(i,1)
     this.commonService.alertService(res)
   },error=>{
     this.commonService.alertService(error)
   })
 
 }
-userTransaction(id){
-
+async userTxnModal(id) {
+  const modal = await this.modalController.create({
+    component: UserTransactionModelPage,
+    cssClass: 'my-custom-class',
+    componentProps: {
+      "id":id
+    }
+  });
+  return await modal.present();
 }
+
 }

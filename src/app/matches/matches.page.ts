@@ -13,6 +13,7 @@ export class MatchesPage implements OnInit {
 
   ngOnInit() {
   }
+
   mySegment='upcoming';
  
 }

@@ -25,15 +25,14 @@ export class OngoingComponent implements OnInit {
     });
       
   }
-  ionViewWillEnter() {
-    this.ngOnInit();
-}
-  async resultModel(game_id) {
+
+  async resultModel(game_id,i) {
     const modal = await this.modalController.create({
       component: ResultEntryPage,
       cssClass: 'my-custom-class',
       componentProps: {
         'game_id': game_id,
+        'i':i
         
       }
     });

@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>USER TXN</ion-title>
+    <ion-button slot='end' class="close-btn" (click)="dismiss()">
+      <ion-icon size='large' name="close-circle-outline"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+<ion-grid>
+  <ion-row *ngFor="let data of TxnData;index as i">
+    <ion-col>
+      <ion-card style="width: 100%;margin: 0px;padding: 0px;border:1px solid lightgray">
+        <ion-card-header >
+          <ion-card-subtitle>DATE - {{data.txn_date | date}}</ion-card-subtitle>
+          <ion-card-title>AMOUNT - {{data.txn_amount}}</ion-card-title><br>
+          <ion-text>Description - {{data.txn_description }}</ion-text><br>
+        <ion-text [style.color]="data.txn_status==='debit'?'red':'green'">Status - {{data.txn_status }}</ion-text><br><br>
+        </ion-card-header>
+        
+        
+       
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+<ion-content>
+
+</ion-content>

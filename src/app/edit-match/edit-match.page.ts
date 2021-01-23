@@ -23,6 +23,7 @@ export class EditMatchPage implements OnInit {
     this.gameForm()
   }
   @Input() gameData;
+  @Input() i;
 dismiss()
 {
   this.modalController.dismiss()
@@ -47,6 +48,11 @@ onSubmitUpdateGameForm()
   updateGameData.append('id',this.gameData.id)
 this.adminServices.updateGame(this.updateGameForm.value,this.gameData.id).subscribe(res=>{
   this.commonService.alertService("Match Update Success")
+  let data={
+    "res":res,
+    "i":this.i
+  }
+  this.commonService.upcomingMatch.next(data)
   this.modalController.dismiss()
 },error=>{
   this.commonService.alertService("Failed !")

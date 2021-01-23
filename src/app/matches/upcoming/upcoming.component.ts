@@ -12,26 +12,39 @@ import { CommonService } from 'src/app/services/common.service';
 })
 export class UpcomingComponent implements OnInit {
   noUpcomingMatch=false
-  upcomingMatchData: any;
+  upcomingMatchData=[];
+  
   constructor(private adminServices:AdminService,
     private alertController:AlertController,
     private modalController:ModalController,
-    private commonService:CommonService) { }
+    private commonService:CommonService) { 
+
+      this.commonService.upcomingMatch.subscribe(res=>{
+        //console.log(res["res"])
+       
+        this.upcomingMatchData[res["i"]]=res["res"]
+      })
+
+    }
 
   ngOnInit(
    
   ) { 
-    this.adminServices.upcomingMatches().subscribe(data=>{
-      this.upcomingMatchData=data;
-      
-       if(data.length===0 )
-       {
-        this.noUpcomingMatch=true;
-       }
-     });
+   this.upcomingMatch()
       
     }
-    async rommDetailsAlert(game_id) {
+  
+    upcomingMatch(){
+      this.adminServices.upcomingMatches().subscribe(data=>{
+        this.upcomingMatchData=data;
+        console.log(data)
+         if(data.length===0 )
+         {
+          this.noUpcomingMatch=true;
+         }
+       });
+    }
+    async rommDetailsAlert(game_id,i) {
       const alert = await this.alertController.create({
         cssClass: 'my-custom-class',
         header: 'Enter Room Details',
@@ -65,7 +78,7 @@ export class UpcomingComponent implements OnInit {
             text: 'Submit',
             handler: (data) => {
              
-              this.onSubmitRoomDetails(data.room_id,data.password,game_id)
+              this.onSubmitRoomDetails(data.room_id,data.password,game_id,i)
             }
           }
         ]
@@ -73,7 +86,7 @@ export class UpcomingComponent implements OnInit {
   
       await alert.present();
     }
-  onSubmitRoomDetails(room_id,password,game_id){
+  onSubmitRoomDetails(room_id,password,game_id,i){
     let form =new FormData()
     form.append("room_id",room_id)
     form.append("game_id",game_id)
@@ -81,6 +94,7 @@ export class UpcomingComponent implements OnInit {
     if(room_id!='' && password!='')
     {
 this.adminServices.insertRoomDetails(form).subscribe(res=>{
+  this.upcomingMatchData.splice(i,1)
   this.commonService.alertService(res)
 },error=>{
   this.commonService.alertService("Failed !")
@@ -93,12 +107,13 @@ this.adminServices.insertRoomDetails(form).subscribe(res=>{
     }
 
   }
-  async editMatch(data) {
+  async editMatch(data,i) {
     const modal = await this.modalController.create({
       component: EditMatchPage,
       cssClass: 'my-custom-class',
       componentProps: {
         'gameData': data,
+        'i':i
         
       }
     });

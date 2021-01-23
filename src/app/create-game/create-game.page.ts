@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AdminService } from '../services/admin.service';
+import { CommonService } from '../services/common.service';
 
 @Component({
   selector: 'app-create-game',
@@ -10,7 +11,8 @@ import { AdminService } from '../services/admin.service';
 export class CreateGamePage implements OnInit {
   createGameForm: FormGroup
   constructor(
-    private _adminService: AdminService
+    private _adminService: AdminService,
+    private commonService:CommonService
   ) { }
 
   ngOnInit() {
@@ -33,7 +35,8 @@ export class CreateGamePage implements OnInit {
   onSubmitCreateGameForm() {
 
     this._adminService.createGame(this.createGameForm.value).subscribe(res => {
-      console.log(res)
+      this.createGameForm.reset()
+      this.commonService.alertService("Match Created")
     }, error => {
       console.log(error)
     });

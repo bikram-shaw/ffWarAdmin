@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { WithdrawPageRoutingModule } from './withdraw-routing.module';
 
 import { WithdrawPage } from './withdraw.page';
+import { DataNotAvailableComponent } from '../data-not-available/data-not-available.component';
 
 @NgModule({
   imports: [
@@ -15,6 +16,6 @@ import { WithdrawPage } from './withdraw.page';
     IonicModule,
     WithdrawPageRoutingModule
   ],
-  declarations: [WithdrawPage]
+  declarations: [WithdrawPage,DataNotAvailableComponent]
 })
 export class WithdrawPageModule {}

@@ -42,4 +42,7 @@ export class AdminService {
   refundWithdraw(data):Observable<any>{
     return this.http.post(this.url+"/refund",data)
   }
+  userTxnHistory(data):Observable<any>{
+    return this.http.post(this.url+"/user-txn",data)
+  }
 }

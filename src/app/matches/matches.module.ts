@@ -10,6 +10,7 @@ import { MatchesPage } from './matches.page';
 import { WithdrawPageModule } from '../withdraw/withdraw.module';
 import { UpcomingComponent } from './upcoming/upcoming.component';
 import { OngoingComponent } from './ongoing/ongoing.component';
+import { DataNotAvailableComponent } from '../data-not-available/data-not-available.component';
 
 @NgModule({
   imports: [
@@ -21,6 +22,6 @@ import { OngoingComponent } from './ongoing/ongoing.component';
     
    
   ],
-  declarations: [MatchesPage,UpcomingComponent,OngoingComponent]
+  declarations: [MatchesPage,UpcomingComponent,OngoingComponent,DataNotAvailableComponent]
 })
 export class MatchesPageModule {}

@@ -26,7 +26,7 @@
           </ion-row>
           <ion-row >
             <ion-col class="ion-text-center">            
-              <ion-chip (click)="resultModel(data.id)">
+              <ion-chip (click)="resultModel(data.id,i)">
               <ion-label color='danger'>Enter Result Details</ion-label>
             </ion-chip>
             </ion-col>
@@ -35,11 +35,11 @@
       </ion-col>
     </ion-row>
     <ion-row *ngIf='noOngoingMatch'>
-      <ion-col class="noMatchError">
-        <ion-img src='https://gamingmazzafiles.s3.ap-south-1.amazonaws.com/gamesImages/ffsolo.jpg'></ion-img>
-        <h1 >No Ongoing Matches</h1>
-        <ion-text color='danger'><small>Join Match Now</small></ion-text>
-      </ion-col>
+     
+        <ion-col  >
+    <app-data-not-available></app-data-not-available>
+    </ion-col>
+      
     </ion-row>
   </ion-grid>
 

@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-content>
-  <ion-grid>
+  <ion-grid >
     <form [formGroup]="createGameForm" (ngSubmit)="onSubmitCreateGameForm()">
       <ion-row>
         <ion-col>
@@ -14,8 +14,8 @@
             <ion-select interface='popover' mode='md' formControlName='type'>
               <ion-select-option value="solo">Solo</ion-select-option>
               <ion-select-option value="duo">Duo</ion-select-option>
-              <ion-select-option value="squard">Squard</ion-select-option>
-              <ion-select-option value="clash squard">Clash Squard</ion-select-option>
+              <ion-select-option value="squad">Squard</ion-select-option>
+              <ion-select-option value="clash squad">Clash Squard</ion-select-option>
 
             </ion-select>
           </ion-item>
@@ -23,7 +23,9 @@
             <ion-label>Map</ion-label>
             <ion-select interface='popover' mode='md' formControlName='map'>
               <ion-select-option value="Bermuda">Bermuda</ion-select-option>
+              <ion-select-option value="Bermuda 2.0">Bermuda 2.0</ion-select-option>
               <ion-select-option value="Purgotory">Purgotory</ion-select-option>
+
               <ion-select-option value="Kalahari">Kalahari</ion-select-option>
               <ion-select-option value="Random">Random</ion-select-option>
 
