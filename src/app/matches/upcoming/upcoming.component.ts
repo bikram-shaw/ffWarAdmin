@@ -13,7 +13,7 @@ import { CommonService } from 'src/app/services/common.service';
 export class UpcomingComponent implements OnInit {
   noUpcomingMatch=false
   upcomingMatchData=[];
-  
+  spinner=false;
   constructor(private adminServices:AdminService,
     private alertController:AlertController,
     private modalController:ModalController,
@@ -30,16 +30,19 @@ export class UpcomingComponent implements OnInit {
   ngOnInit(
    
   ) { 
-   this.upcomingMatch()
+  
       
     }
   
-    upcomingMatch(){
-      this.adminServices.upcomingMatches().subscribe(data=>{
+    upcomingMatch(type){
+      this.spinner=true;
+      this.adminServices.upcomingMatches(type).subscribe(data=>{
         this.upcomingMatchData=data;
         console.log(data)
+        this.spinner=false;
          if(data.length===0 )
          {
+          this.spinner=false;
           this.noUpcomingMatch=true;
          }
        });

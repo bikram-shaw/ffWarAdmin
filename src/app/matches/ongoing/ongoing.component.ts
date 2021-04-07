@@ -14,18 +14,22 @@ export class OngoingComponent implements OnInit {
 
   constructor(private adminService:AdminService,
     private modalController:ModalController,) { }
-
+    spinner=false
   ngOnInit() {
-    this.adminService.ongoingMatches().subscribe(data => {
-      this.ongoingMatchData = data;
-     
-      if (data.length === 0) {
-        this.noOngoingMatch = true;
-      }
-    });
+
       
   }
-
+onGoingmatch(type){
+  this.spinner=true
+  this.adminService.ongoingMatches(type).subscribe(data => {
+    this.spinner=false
+    this.ongoingMatchData = data;
+   
+    if (data.length === 0) {
+      this.noOngoingMatch = true;
+    }
+  });
+}
   async resultModel(game_id,i) {
     const modal = await this.modalController.create({
       component: ResultEntryPage,

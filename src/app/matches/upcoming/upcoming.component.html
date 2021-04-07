@@ -4,6 +4,26 @@
 
 
   <ion-grid>
+    <ion-row class="ion-text-center">
+      <ion-col>
+        
+        <ion-chip (click)="upcomingMatch('ffsds')">
+          <ion-label color='dark'>Solo Duo Squad</ion-label>
+        </ion-chip>
+        
+        <ion-chip (click)="upcomingMatch('ffcs')">
+          <ion-label color='dark'>Clash Squad</ion-label>
+        </ion-chip>
+      </ion-col>
+      
+
+    </ion-row>
+    <ion-row class="ion-text-center " *ngIf="spinner"> 
+      <ion-col>  
+      <ion-spinner name="circles"></ion-spinner>
+    </ion-col> 
+    
+    </ion-row>
     <ion-row  class="ion-margin-bottom" *ngFor='let data of upcomingMatchData; index as i'>
       <ion-col class="bs ion-text-center" *ngIf='!noUpcomingMatch' >
         <ion-img src='https://gamingmazzafiles.s3.ap-south-1.amazonaws.com/gamesImages/ffsolo.jpg'></ion-img>
@@ -11,10 +31,10 @@
           <ion-row >
             <ion-col >
               
-              <b class="gt">#{{data.id}} {{data.type | uppercase}} MATCH</b><br>
+              <b class="gt">#{{data.id}} {{data.type | uppercase}} MATCH</b>&nbsp; <small>{{data.category}}</small><br>
               <ion-text color='danger'>Date : {{data.date| date:"dd/mm/yyyy"}}</ion-text><br>
-              <ion-text color='danger'>Time : {{data.time }}</ion-text><br>
-              <ion-text>Winning Prize : {{data.win_prize}}</ion-text><br>
+              <ion-text color='danger'>Time : {{data.time}}</ion-text><br>
+              <ion-text>Winning Prize : {{data.winning_prize}}</ion-text><br>
               <ion-text>Entry Fee : {{data.entry_fee}}</ion-text><br>
               <ion-text>Per Kill : {{data.per_kill}}</ion-text><br>
               <ion-text>Map : {{data.map}}</ion-text><br><br>

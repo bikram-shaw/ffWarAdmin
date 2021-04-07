@@ -10,9 +10,10 @@ import { CommonService } from '../services/common.service';
 })
 export class ResultEntryPage implements OnInit {
 @Input() game_id:any
-  joinPlayerList: any=[{"player_name":"null"}];
-  resultData=[]
-  i=0
+    iIndex=0;
+  joinPlayerList=[{"player_name":"loading...","id":"loading..."}];
+  
+  resultData=[];
   kill=0;
   amount=0;
   finalSubmit: boolean=false;
@@ -21,7 +22,7 @@ export class ResultEntryPage implements OnInit {
     private adminServices:AdminService,
     private commonService:CommonService,
     private alertController:AlertController
-    ) { }
+    ) {this.joinPlayerList.length}
 
   ngOnInit() {
     this.fetchJoinPlayer()
@@ -33,8 +34,9 @@ export class ResultEntryPage implements OnInit {
   fetchJoinPlayer()
   {
     this.adminServices.fetchJoinPlayer(this.game_id).subscribe(res=>{
-      if(res!='')
+      if(res!=''){
       this.joinPlayerList=res
+      console.log(res);}
       else{
       setTimeout(() => {
         this.modalController.dismiss()
@@ -48,10 +50,10 @@ export class ResultEntryPage implements OnInit {
     
     let data={
       "kill":this.kill,
-      "amount":this.amount,
-      "player_id":this.joinPlayerList[this.i].user,
-      "player_name":this.joinPlayerList[this.i].player_name,
-      "id":this.joinPlayerList[this.i].id,
+      "wining_amount":this.amount,
+      //"player_id":this.joinPlayerList[this.i].user,
+      //"player_name":this.joinPlayerList[this.iIndex].player_name,
+      "id":this.joinPlayerList[this.iIndex].id,
     }
     
       this.resultData.push(data)
@@ -67,7 +69,7 @@ export class ResultEntryPage implements OnInit {
       this.finalSubmit=true
       }
       else{
-        this.i++
+        this.iIndex++
       }
   }
   async editResultDataAlert(i) {
@@ -118,7 +120,8 @@ export class ResultEntryPage implements OnInit {
       "game_id":this.game_id,
       "data":this.resultData
     }
-  this.adminServices.submitResult(finalResultData).subscribe(res=>{
+    console.log(finalResultData)
+  this.adminServices.submitResult(this.resultData).subscribe(res=>{
     this.modalController.dismiss()
     this.commonService.alertService("Success")
   },error=>{

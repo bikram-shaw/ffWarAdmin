@@ -10,13 +10,20 @@
       <ion-row>
         <ion-col>
           <ion-item>
+            <ion-label>Category</ion-label>
+            <ion-select interface='popover' mode='md' formControlName='category'>
+              <ion-select-option value="ffsds">Solo | Duo | Squad</ion-select-option>
+              <ion-select-option value="ffcs">Clash Squad</ion-select-option>
+                        
+
+            </ion-select>
+          </ion-item>
+          <ion-item>
             <ion-label>Type</ion-label>
             <ion-select interface='popover' mode='md' formControlName='type'>
               <ion-select-option value="solo">Solo</ion-select-option>
               <ion-select-option value="duo">Duo</ion-select-option>
               <ion-select-option value="squad">Squard</ion-select-option>
-              <ion-select-option value="clash squad">Clash Squard</ion-select-option>
-
             </ion-select>
           </ion-item>
           <ion-item>
@@ -45,7 +52,7 @@
         <ion-col size='6'>
           <ion-item>
             <ion-label position="stacked">Winning Amount</ion-label>
-            <ion-input formControlName='win_prize' type='number'></ion-input>
+            <ion-input formControlName='winning_prize' type='number'></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>

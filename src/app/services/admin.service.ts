@@ -16,11 +16,11 @@ export class AdminService {
   withdrawRequest():Observable<any>{
     return this.http.get(this.url+"/user-withdraw-request/", );
   }
-  upcomingMatches(): Observable<any> {
-    return this.http.get(this.url + "/active-game");
+  upcomingMatches(type): Observable<any> {
+    return this.http.get(this.url + "/game/?game="+type+"&&status=active");
   }
-  ongoingMatches(): Observable<any> {
-    return this.http.get(this.url + "/ongoing-game");
+  ongoingMatches(type): Observable<any> {
+    return this.http.get(this.url + "/game?game="+type+"&&status=ongoing");
   }
   insertRoomDetails(data): Observable<any> {
     return this.http.post(this.url + "/room/",data);
@@ -29,12 +29,11 @@ export class AdminService {
     return this.http.put(this.url+"/game/"+game_id+"/", data);
   }
   fetchJoinPlayer(data): Observable<any> {
-    let form=new FormData()
-    form.append("game_id",data)
-    return this.http.post(this.url+"/fetch-join-player", form);
+    
+    return this.http.get(this.url+"/join-match/?game_id="+data);
   }
   submitResult(data):Observable<any>{
-    return this.http.post(this.url+"/result",data)
+    return this.http.post(this.url+"/result/",data)
   }
   confirmWithdraw(id):Observable<any>{
     return this.http.get(this.url+"/user-withdraw-request/"+id)

@@ -31,7 +31,9 @@ dismiss()
 }
 gameForm() {
   this.updateGameForm = new FormGroup({
-    'status':new FormControl('active'),
+
+
+    'category':new FormControl(this.gameData.category,Validators.required),
     'type': new FormControl(this.gameData.type, Validators.required),
     'map': new FormControl(this.gameData.map, Validators.required),
     'date': new FormControl(this.gameData.date, Validators.required),
@@ -39,7 +41,7 @@ gameForm() {
     'spots': new FormControl(this.gameData.spots, Validators.required),
     'entry_fee': new FormControl(this.gameData.entry_fee, Validators.required),
     'per_kill': new FormControl(this.gameData.per_kill, Validators.required),
-    'win_prize': new FormControl(this.gameData.win_prize, Validators.required)
+    'winning_prize': new FormControl(this.gameData.winning_prize, Validators.required)
   })
 }
 onSubmitUpdateGameForm()
@@ -49,7 +51,7 @@ onSubmitUpdateGameForm()
 this.adminServices.updateGame(this.updateGameForm.value,this.gameData.id).subscribe(res=>{
   this.commonService.alertService("Match Update Success")
   let data={
-    "res":res,
+    "res":this.updateGameForm.value,
     "i":this.i
   }
   this.commonService.upcomingMatch.next(data)
